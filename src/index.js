@@ -30,10 +30,7 @@ function onInputEl(e) {
           createMarkup(responce);
         }
       })
-      .catch(error => {
-        clearMarkup();
-        Notify.failure('Oops, there is no country with that name');
-      });
+      .catch(onError);
   }
 }
 
@@ -48,4 +45,9 @@ function createMarkup(data) {
 function clearMarkup() {
   countryBox.innerHTML = '';
   countriesList.innerHTML = '';
+}
+
+function onError() {
+  clearMarkup();
+  Notify.failure('Oops, there is no country with that name');
 }
