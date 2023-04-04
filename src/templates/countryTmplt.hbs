@@ -1,0 +1,12 @@
+<div class='country-wraper'>
+  <img src={{this.flags.svg}} alt='' width='120' />
+  <h1 class='country-title'>{{this.name.official}}</h1>
+</div>
+<p><b>Capital: </b>{{this.capital}}</p>
+<p><b>Population: </b>{{this.population}}</p>
+<p><b>Languages: </b>
+  {{#each this.languages}}
+    {{this}},
+    {{!-- {{#if @last}}{{this}}{{/if}} --}}
+  {{/each}}
+</p>
