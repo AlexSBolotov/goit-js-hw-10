@@ -6,7 +6,10 @@
 <p><b>Population: </b>{{this.population}}</p>
 <p><b>Languages: </b>
   {{#each this.languages}}
-    {{this}},
+    {{#unless @last}}
+      {{this}},
+    {{/unless}}
+    {{#if @last}}{{this}}{{/if}}
   {{/each}}
 </p>
 
