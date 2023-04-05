@@ -8,4 +8,10 @@ export function fetchCountries(query) {
     }
     return response.json();
   });
+  // .catch(err => {
+  //   console.log(err);
+  //   if (err.message === 404) {
+  //     console.log(err);
+  //   }
+  // });
 }

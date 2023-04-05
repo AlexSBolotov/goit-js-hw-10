@@ -17,37 +17,34 @@ function onInputEl(e) {
   if (query === '') {
     clearMarkup();
     return;
-  } else {
-    fetchCountries(query)
-      .then(responce => {
-        if (responce.length > 10) {
-          clearMarkup();
-          Notify.info(
-            'Too many matches found. Please enter a more specific name.'
-          );
-        } else {
-          clearMarkup();
-          createMarkup(responce);
-        }
-      })
-      .catch(onError);
   }
+  fetchCountries(query).then(onSuccess).catch(onError);
+}
+
+function onSuccess(data) {
+  if (data.length > 10) {
+    clearMarkup();
+    Notify.info('Too many matches found. Please enter a more specific name.');
+  } else {
+    clearMarkup();
+    createMarkup(data);
+  }
+}
+
+function onError() {
+  clearMarkup();
+  Notify.failure('Oops, there is no country with that name');
 }
 
 function createMarkup(data) {
   if (data.length === 1) {
-    countryBox.innerHTML = countryTmplt(data[0]);
+    countryBox.insertAdjacentHTML('beforeend', countryTmplt(data[0]));
   } else {
-    countriesList.innerHTML = countriesTmplt(data);
+    countriesList.insertAdjacentHTML('beforeend', countriesTmplt(data));
   }
 }
 
 function clearMarkup() {
   countryBox.innerHTML = '';
   countriesList.innerHTML = '';
-}
-
-function onError() {
-  clearMarkup();
-  Notify.failure('Oops, there is no country with that name');
 }
